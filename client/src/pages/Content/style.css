@@ -1,0 +1,61 @@
+.content {
+  padding: 10px;
+  font-family: Quicksand;
+  font-size: larger;
+  color: rgb(76, 59, 59);
+  background-color: #fff;
+  height: 85vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content .sub-topic {
+  cursor: pointer;
+}
+
+#c1 {
+  width: 20%;
+  padding: 20px;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress {
+  cursor: pointer;
+  margin-top: auto;
+  padding-bottom: 0;
+}
+
+#c2 {
+  width: 80%;
+  padding: 20px;
+}
+
+#c1,
+#c2 {
+  height: 80vh;
+  overflow-y: auto;
+}
+
+#c1::-webkit-scrollbar,
+#c2::-webkit-scrollbar {
+  display: none;
+}
+
+.start-journey h2 {
+  margin-left: 16%;
+}
+
+.download-button {
+  margin-left: 14px;
+}
+
+.progress-bar-name {
+  font-size: 16px;
+  margin-left: 54px;
+  color: rgb(76, 59, 59);
+  font-weight: bolder;
+}

@@ -1,0 +1,29 @@
+.ml-overview img {
+  width: 350px;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 260px;
+}
+
+.concept img {
+  margin-left: 80px;
+  padding: 0px;
+}
+
+.neural-network img {
+  width: 500px;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 20%;
+}
+
+.train-test {
+  margin-top: 80px;
+}
+
+.perceptron img {
+  width: 400px;
+  height: auto;
+  margin-top: 20px;
+  margin-left: 160px;
+}

@@ -1,0 +1,53 @@
+.welcome {
+  height: 100vh;
+  font-family: "Quicksand", Arial;
+  background-size: 200px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.text-content {
+  color: black;
+  position: absolute;
+  border: none;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 55%;
+  padding: 40px 40px;
+  text-align: center;
+}
+
+.text-intro {
+  font-size: 20px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  gap: 20px;
+}
+
+button {
+  white-space: nowrap;
+  padding: 10px 20px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-learning,
+.button-assess,
+.button-goal {
+  margin: 0;
+}
