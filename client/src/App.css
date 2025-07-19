@@ -1,0 +1,62 @@
+/* 
+ * .App is a general container class for the main app layout.
+ * It centers text within its children.
+ */
+ .App {
+  text-align: center; /* Center-align text inside the .App container */
+}
+
+/* 
+ * .App-logo styles the logo image.
+ * This class sets the height of the logo and prevents pointer events on it.
+ */
+.App-logo {
+  height: 40vmin; /* Set the height of the logo to 40% of the viewport's minimum dimension */
+  pointer-events: none; /* Disable pointer events (clicks, hovers) on the logo */
+}
+
+/* 
+ * @media query to apply styles based on user's preference for reduced motion.
+ * If user prefers animations, apply spinning animation to the logo.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear; /* Apply infinite spinning animation to the logo */
+  }
+}
+
+/* 
+ * .App-header styles the header of the app.
+ * It sets up the background, dimensions, and alignment of content.
+ */
+.App-header {
+  background-color: #282c34; /* Dark background color for the header */
+  min-height: 100vh; /* Ensure the header takes up at least the full viewport height */
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Arrange child elements in a vertical column */
+  align-items: center; /* Center-align child elements horizontally */
+  justify-content: center; /* Center-align child elements vertically */
+  font-size: calc(10px + 2vmin); /* Responsive font size based on viewport dimensions */
+  color: white; /* Set text color to white */
+}
+
+/* 
+ * .App-link styles the links within the app.
+ * This class sets the color of links.
+ */
+.App-link {
+  color: #61dafb; /* Apply a light blue color to links */
+}
+
+/* 
+ * @keyframes App-logo-spin defines the spinning animation for the logo.
+ * It rotates the logo from 0 degrees to 360 degrees.
+ */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); /* Start the rotation from 0 degrees */
+  }
+  to {
+    transform: rotate(360deg); /* Rotate to 360 degrees */
+  }
+}
