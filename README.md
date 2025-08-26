@@ -128,9 +128,14 @@
 ## 🖼️ Screenshots
 
 
-![Goals Screenshot](./screenshots/goals.png)
-![Quiz Screenshot](./screenshots/quiz.png)
-![Assessment Screenshot](./screenshots/Assessment.png)
+![Goals Screenshot](./screenshots/goals.png)  
+*Setting Goals*
+
+![Quiz Screenshot](./screenshots/quiz.png)  
+*Interactive quiz module with immediate feedback*
+
+![Assessment Screenshot](./screenshots/assessment.png)  
+*ML readiness assessment*
 
 
 ---
