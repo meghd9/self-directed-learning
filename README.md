@@ -1,7 +1,9 @@
 # 🧠 Self-Directed Learning Web Application (MERN)
 
+![Dashboard Screenshot](./screenshots/dashboard.png)
+
 <div align="center">
-  <h3 align="center">Interactive Platform to Learn Machine Learning Concepts – Personalized, Gamified, and Trackable</h3>
+  <h3 align="center">Interactive Platform to Learn Computer Science Concepts – Personalised, Gamified and Trackable</h3>
   <div>
     <img src="https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
     <img src="https://img.shields.io/badge/-Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
@@ -42,10 +44,10 @@
 ## ⚡️ Features
 
 - 🔐 **User Authentication**  
-  Secure registration, login, and logout using JWT tokens  
+  Secure registration, login and logout using JWT tokens  
 
 - 🧠 **Readiness Assessment Quiz**  
-  Initial quiz evaluates user level: Foundation → Intermediate → Advanced  
+  Initial quiz evaluates user level: Foundation → Beginner → Intermediate → Advanced  
 
 - 🎯 **Goal Setting**  
   Set learning goals with personal deadlines  
@@ -54,13 +56,13 @@
   Four levels of curated content with visuals and code snippets  
 
 - 📝 **Quizzes & Evaluation**  
-  Track understanding with retakeable quizzes and instant feedback  
+  Track understanding with quizzes and instant feedback  
 
 - 📊 **Progress Tracking**  
   Visual progress bar and historical score tracking  
 
 - 🎓 **Certificate Generation**  
-  Auto-generate personalized certificates after course completion  
+  Auto-generate personalised certificates after course completion  
 
 - 📖 **Built-in User Guide**  
   Integrated help section for seamless onboarding  
@@ -75,47 +77,60 @@
 - [MongoDB](https://www.mongodb.com/)
 - [Git](https://git-scm.com/)
 
-### 🚀 Clone and Run
+---
 
-```bash
-git clone https://github.com/yourusername/self-directed-learning-app.git
-cd self-directed-learning-app
-```
+### 🧰 Installation Instructions
 
-#### Install backend
+1. **Open the project directory**  
+   Open the folder containing both `client` and `server` directories in your terminal (or Command Prompt on Windows).
 
-```bash
-cd server
-npm install
-```
+2. **Set up the server (backend) files**
+   ```bash
+   cd server
+   npm install
+   ```
+   This will install all necessary dependencies for the backend.
 
-#### Install frontend
+3. **Set up the client (frontend) files**
+   - Open a new terminal window or tab, or navigate back to the root folder.
+   ```bash
+   cd client
+   npm install
+   ```
+   This installs all required dependencies for the frontend.
 
-```bash
-cd ../client
-npm install
-```
+4. **Verify Installation**
+   - Make sure `node_modules` folders exist in both the `client` and `server` directories.
+   - This indicates that the packages have been successfully installed.
 
-#### Start development servers
+5. **Start the backend server**
+   ```bash
+   cd server
+   npm run dev
+   ```
 
-```bash
-npm run dev
-```
+6. **Start the frontend server**
+   ```bash
+   cd client
+   npm start
+   ```
+   This launches the React development server.
 
-- Frontend: [http://localhost:5173](http://localhost:5173)  
-- Backend: [http://localhost:5000](http://localhost:5000)
+7. **Check the application**
+   - The app should automatically open in your default web browser.
+   - If it doesn’t, visit: [http://localhost:3000](http://localhost:3000)
+
+8. **Running both servers simultaneously**
+   - With both frontend and backend running, the application should be fully functional, and the client should communicate seamlessly with the server.
 
 ---
 
 ## 🖼️ Screenshots
 
-> *(Include your actual images in a `/screenshots` folder and link them below)*
-
 ```md
-![Dashboard Screenshot](./screenshots/dashboard.png)
+![Goals Screenshot](./screenshots/goals.png)
 ![Quiz Screenshot](./screenshots/quiz.png)
-![Progress Screenshot](./screenshots/progress.png)
-![Certificate Screenshot](./screenshots/certificate.png)
+![Assessment Screenshot](./screenshots/Assessment.png)
 ```
 
 ---
