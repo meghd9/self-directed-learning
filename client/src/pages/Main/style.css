@@ -1,0 +1,36 @@
+.main {
+  height: 100vh;
+  background-size: 200px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(6px);
+  z-index: 1;
+}
+
+.text-content {
+  background-color: #f1f1f1;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
+  border: 1px solid #f1f1f1;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 45%;
+  padding: 40px 40px;
+  text-align: center;
+}

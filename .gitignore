@@ -1,0 +1,68 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ===============================
+# DEPENDENCIES
+# ===============================
+node_modules/
+client/node_modules/
+server/node_modules/
+.pnp/
+.pnp.js
+
+# ===============================
+# TESTING
+# ===============================
+/coverage
+
+# ===============================
+# PRODUCTION / BUILD OUTPUT
+# ===============================
+/build
+client/build/
+server/build/
+dist/
+
+# ===============================
+# ENVIRONMENT VARIABLES
+# ===============================
+.env
+.env.*
+client/.env
+server/.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ===============================
+# LOG FILES
+# ===============================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===============================
+# OS / EDITOR SPECIFIC FILES
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ===============================
+# MISC / CACHE
+# ===============================
+.cache/
+
+# ===============================
+# OPTIONAL: DOCKER / OTHER TOOLS
+# ===============================
+docker-compose.override.yml
+
+# ===============================
+# OPTIONAL: NEXT.JS / VITE CACHES
+# ===============================
+.next/
+out/
+.vite/
