@@ -1,4 +1,4 @@
-# 🧠 Self-Directed Learning Web Application (MERN)
+# 👨‍💻 Self-Directed Learning Web Application (MERN)
 
 ![Dashboard Screenshot](./screenshots/dashboard.png)
 
@@ -127,11 +127,11 @@
 
 ## 🖼️ Screenshots
 
-```md
+
 ![Goals Screenshot](./screenshots/goals.png)
 ![Quiz Screenshot](./screenshots/quiz.png)
 ![Assessment Screenshot](./screenshots/Assessment.png)
-```
+
 
 ---
 
