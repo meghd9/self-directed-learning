@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"; // Importing necessary React hooks
+import React, { useCallback, useEffect, useRef, useState } from "react"; // Importing necessary React hooks
 import {
   AdvanceQuiz,
   BeginnerQuiz,
@@ -24,10 +24,12 @@ const Quiz = ({ level }) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   // State to keep track of the selected answer
   const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [selectedAnswerValue, setSelectedAnswerValue] = useState("");
   // State to determine whether to show the result or not
   const [showResult, setShowResult] = useState(false);
   // State to keep track of which answer was selected
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [showAnswerFeedback, setShowAnswerFeedback] = useState(false);
   // State to store the result of the quiz
   const [result, setResult] = useState({
     score: 0,
@@ -37,6 +39,7 @@ const Quiz = ({ level }) => {
 
   const navigate = useNavigate(); // Hook to handle navigation
   const [progressUpdated, setProgressUpdated] = useState(false); // State to prevent multiple progress updates
+  const feedbackTimeoutRef = useRef(null);
 
   /**
    * Effect hook that triggers when the result state changes.
@@ -96,6 +99,14 @@ const Quiz = ({ level }) => {
     progressResult();
   }, [progressResult]);
 
+  useEffect(() => {
+    return () => {
+      if (feedbackTimeoutRef.current) {
+        clearTimeout(feedbackTimeoutRef.current);
+      }
+    };
+  }, []);
+
   // Determine the appropriate quiz data based on the level prop
   let quizData;
   quizData =
@@ -127,8 +138,8 @@ const Quiz = ({ level }) => {
    * Updates the result based on the selected answer and moves to the next question or shows the result.
    */
   const onClickNext = () => {
-    // Reset the selected answer index
-    setSelectedAnswerIndex(null);
+    setShowAnswerFeedback(true);
+
     // Update the result based on whether the selected answer was correct
     setResult((prev) =>
       selectedAnswer
@@ -139,13 +150,21 @@ const Quiz = ({ level }) => {
           }
         : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
     );
-    // Move to the next question or show the result if the last question has been reached
-    if (activeQuestion !== questions.length - 1) {
-      setActiveQuestion((prev) => prev + 1);
-    } else {
-      setActiveQuestion(0);
-      setShowResult(true);
-    }
+
+    feedbackTimeoutRef.current = setTimeout(() => {
+      setSelectedAnswerIndex(null);
+      setSelectedAnswer("");
+      setSelectedAnswerValue("");
+      setShowAnswerFeedback(false);
+
+      // Move to the next question or show the result if the last question has been reached
+      if (activeQuestion !== questions.length - 1) {
+        setActiveQuestion((prev) => prev + 1);
+      } else {
+        setActiveQuestion(0);
+        setShowResult(true);
+      }
+    }, 700);
   };
 
   /**
@@ -156,7 +175,11 @@ const Quiz = ({ level }) => {
    * @param {number} index - The index of the selected answer.
    */
   const onAnswerSelected = (answer, index) => {
+    if (showAnswerFeedback) {
+      return;
+    }
     setSelectedAnswerIndex(index);
+    setSelectedAnswerValue(answer);
     setSelectedAnswer(answer === correctAnswer);
   };
 
@@ -172,29 +195,54 @@ const Quiz = ({ level }) => {
     <div className="quiz-container">
       {/* Render quiz questions and options if result is not yet shown */}
       {!showResult ? (
-        <div>
-          <div>
+        <div className="quiz-shell">
+          <div className="quiz-progress">
             {/* Display the current question number and total number of questions */}
-            <span className="active-question-no">
-              {addLeadingZero(activeQuestion + 1)}
-            </span>
-            <span className="total-question">
-              /{addLeadingZero(questions.length)}
-            </span>
+            <div className="quiz-progress-copy">
+              <span className="quiz-kicker">Assessment quiz</span>
+              <div>
+                <span className="active-question-no">
+                  {addLeadingZero(activeQuestion + 1)}
+                </span>
+                <span className="total-question">
+                  /{addLeadingZero(questions.length)}
+                </span>
+              </div>
+            </div>
+            <div className="quiz-progress-bar">
+              <span
+                className="quiz-progress-fill"
+                style={{
+                  width: `${((activeQuestion + 1) / questions.length) * 100}%`,
+                }}
+              />
+            </div>
           </div>
-          {/* Display the current question */}
-          <h2>{question}</h2>
-          <ul>
+          <div className="quiz-question-card">
+            {/* Display the current question */}
+            <h2>{question}</h2>
+            <p className="quiz-helper">Choose the option that best matches your current understanding.</p>
+          </div>
+          <ul className="quiz-options">
             {/* Render each choice as a list item */}
             {choices.map((answer, index) => (
               <li
                 onClick={() => onAnswerSelected(answer, index)}
                 key={answer}
-                className={
-                  selectedAnswerIndex === index ? "selected-answer" : null
-                }
+                className={[
+                  selectedAnswerIndex === index ? "selected-answer" : "",
+                  showAnswerFeedback && answer === correctAnswer ? "correct-answer" : "",
+                  showAnswerFeedback &&
+                  answer === selectedAnswerValue &&
+                  answer !== correctAnswer
+                    ? "wrong-answer"
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
-                {answer}
+                <span className="option-marker">{String.fromCharCode(65 + index)}</span>
+                <span className="option-text">{answer}</span>
               </li>
             ))}
           </ul>
@@ -202,7 +250,7 @@ const Quiz = ({ level }) => {
             {/* Button to move to the next question or finish the quiz */}
             <button
               onClick={onClickNext}
-              disabled={selectedAnswerIndex === null}
+              disabled={selectedAnswerIndex === null || showAnswerFeedback}
             >
               {activeQuestion === questions.length - 1 ? "Finish" : "Next"}
             </button>
