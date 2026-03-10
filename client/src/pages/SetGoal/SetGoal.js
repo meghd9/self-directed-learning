@@ -89,7 +89,6 @@ const SetGoal = () => {
     <div className="set-goal-page">
       <section className="set-goal-hero">
         <div className="set-goal-copy">
-          <p className="set-goal-eyebrow">Learning Planner</p>
           <h1>Set Goals</h1>
           <p className="set-goal-subtitle">
             Organize your next milestones with a focused plan that matches your
