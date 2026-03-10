@@ -45,8 +45,7 @@
 }
 
 .set-goal-stats {
-  display: grid;
-  gap: 14px;
+  display: flex;
 }
 
 .stat-card {
@@ -57,7 +56,7 @@
   box-shadow: 0 12px 28px rgba(76, 59, 59, 0.08);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 110px;
 }
 
@@ -72,6 +71,24 @@
 
 .stat-card strong {
   font-size: 28px;
+  color: #4c3b3b;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.stat-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a46c60;
+  margin-bottom: 6px;
+}
+
+.stat-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.35;
   color: #4c3b3b;
 }
 
@@ -155,9 +172,9 @@
 .goal-item {
   border-radius: 20px;
   padding: 18px 20px;
-  background: linear-gradient(135deg, rgba(240, 196, 180, 0.72) 0%, #fff 100%);
-  border: 1px solid rgba(164, 108, 96, 0.16);
-  box-shadow: 0 12px 28px rgba(76, 59, 59, 0.08);
+  background: #ffffff;
+  border: 1px solid rgba(164, 108, 96, 0.12);
+  box-shadow: 0 8px 20px rgba(76, 59, 59, 0.05);
   box-sizing: border-box;
 }
 
@@ -166,6 +183,48 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
+}
+
+.goal-edit {
+  display: grid;
+  gap: 16px;
+}
+
+.goal-edit-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.goal-edit-fields input,
+.goal-edit-fields select {
+  width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 1px solid rgba(164, 108, 96, 0.24);
+  padding: 0 16px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #4c3b3b;
+  background: #fff;
+  outline: none;
+}
+
+.goal-edit-fields select {
+  background-color: #fff7f2;
+}
+
+.goal-edit-fields input:focus,
+.goal-edit-fields select:focus {
+  border-color: #a46c60;
+  box-shadow: 0 0 0 4px rgba(164, 108, 96, 0.12);
+}
+
+.goal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .goal-details {
@@ -228,7 +287,8 @@
 
 @media (max-width: 900px) {
   .set-goal-hero,
-  .input-group {
+  .input-group,
+  .goal-edit-fields {
     grid-template-columns: 1fr;
   }
 
@@ -254,6 +314,11 @@
   }
 
   .goal-view {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goal-actions {
     flex-direction: column;
     align-items: stretch;
   }

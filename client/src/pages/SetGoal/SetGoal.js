@@ -41,6 +41,10 @@ const SetGoal = () => {
    * @type {string}
    */
   const [level, setLevel] = useState("");
+  const [editingGoalIndex, setEditingGoalIndex] = useState(null);
+  const [editingGoalText, setEditingGoalText] = useState("");
+  const [editingGoalDeadline, setEditingGoalDeadline] = useState("");
+  const [editingGoalLevel, setEditingGoalLevel] = useState("");
 
   /**
    * Effect hook to update localStorage whenever the goals state changes.
@@ -58,20 +62,29 @@ const SetGoal = () => {
    * 
    * @function
    */
-  const addGoal = () => {
+  const resetForm = () => {
+    setNewGoal("");
+    setDeadline("");
+    setLevel("");
+  };
+
+  const saveGoal = () => {
+    if (!newGoal.trim()) {
+      return;
+    }
+
     const updatedGoals = [
       ...goals,
       {
-        text: newGoal,
+        text: newGoal.trim(),
         progress: 0,
         deadline: deadline || null,
         level: level || null,
       },
     ];
+
     setGoals(updatedGoals);
-    setNewGoal("");
-    setDeadline("");
-    setLevel("");
+    resetForm();
   };
 
   /**
@@ -83,6 +96,46 @@ const SetGoal = () => {
   const deleteGoal = (index) => {
     const updatedGoals = goals.filter((_, i) => i !== index);
     setGoals(updatedGoals);
+    if (editingGoalIndex === index) {
+      cancelEdit();
+    } else if (editingGoalIndex !== null && editingGoalIndex > index) {
+      setEditingGoalIndex((currentIndex) => currentIndex - 1);
+    }
+  };
+
+  const editGoal = (index) => {
+    const goal = goals[index];
+    setEditingGoalIndex(index);
+    setEditingGoalText(goal.text);
+    setEditingGoalDeadline(goal.deadline || "");
+    setEditingGoalLevel(goal.level || "");
+  };
+
+  const cancelEdit = () => {
+    setEditingGoalIndex(null);
+    setEditingGoalText("");
+    setEditingGoalDeadline("");
+    setEditingGoalLevel("");
+  };
+
+  const saveEditedGoal = (index) => {
+    if (!editingGoalText.trim()) {
+      return;
+    }
+
+    const updatedGoals = goals.map((goal, goalIndex) =>
+      goalIndex === index
+        ? {
+            ...goal,
+            text: editingGoalText.trim(),
+            deadline: editingGoalDeadline || null,
+            level: editingGoalLevel || null,
+          }
+        : goal
+    );
+
+    setGoals(updatedGoals);
+    cancelEdit();
   };
 
   return (
@@ -99,10 +152,10 @@ const SetGoal = () => {
           <div className="stat-card">
             <span className="stat-label">Active goals</span>
             <strong>{goals.length}</strong>
-          </div>
-          <div className="stat-card">
-            <span className="stat-label">Next step</span>
-            <strong>{goals.length > 0 ? "Stay consistent" : "Add your first goal"}</strong>
+            <span className="stat-subtitle">Next step</span>
+            <p className="stat-text">
+              {goals.length > 0 ? "Stay consistent" : "Add your first goal"}
+            </p>
           </div>
         </div>
       </section>
@@ -142,7 +195,11 @@ const SetGoal = () => {
               </option>
             ))}
           </select>
-          <Button type="submit" text="Add Goal" onClick={addGoal} />
+          <Button
+            type="button"
+            text="Add Goal"
+            onClick={saveGoal}
+          />
         </div>
       </section>
 
@@ -163,24 +220,85 @@ const SetGoal = () => {
           ) : (
             goals.map((goal, index) => (
               <li key={index} className="goal-item">
-                <div className="goal-view">
-                  <div className="goal-details">
-                    <span className="goal-text">{goal.text}</span>
-                    <div className="goal-meta">
-                      {goal.level && <span className="goal-pill">{goal.level}</span>}
-                      {goal.deadline && (
-                        <span className="goal-pill">
-                          {goal.deadline} week{goal.deadline > 1 ? "s" : ""}
-                        </span>
-                      )}
+                {editingGoalIndex === index ? (
+                  <div className="goal-edit">
+                    <div className="goal-edit-fields">
+                      <input
+                        type="text"
+                        value={editingGoalText}
+                        onChange={(e) => setEditingGoalText(e.target.value)}
+                        placeholder="Enter a learning goal"
+                      />
+                      <select
+                        value={editingGoalLevel}
+                        onChange={(e) => setEditingGoalLevel(e.target.value)}
+                      >
+                        <option value="" disabled>
+                          Select level
+                        </option>
+                        <option value="Foundation">Foundation</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advance">Advance</option>
+                      </select>
+                      <select
+                        value={editingGoalDeadline}
+                        onChange={(e) => setEditingGoalDeadline(Number(e.target.value))}
+                      >
+                        <option value="" disabled>
+                          Select deadline
+                        </option>
+                        {[...Array(5).keys()].map((week) => (
+                          <option key={week + 1} value={week + 1}>
+                            {week + 1} week{week > 0 ? "s" : ""}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="goal-actions">
+                      <Button
+                        type="button"
+                        text="Save"
+                        onClick={() => saveEditedGoal(index)}
+                      />
+                      <Button
+                        type="button"
+                        text="Cancel"
+                        onClick={cancelEdit}
+                        backgroundColor="#ead7cf"
+                        textColor="#874f3a"
+                      />
                     </div>
                   </div>
-                  <Button
-                    type="button"
-                    text="Delete"
-                    onClick={() => deleteGoal(index)}
-                  />
-                </div>
+                ) : (
+                  <div className="goal-view">
+                    <div className="goal-details">
+                      <span className="goal-text">{goal.text}</span>
+                      <div className="goal-meta">
+                        {goal.level && <span className="goal-pill">{goal.level}</span>}
+                        {goal.deadline && (
+                          <span className="goal-pill">
+                            {goal.deadline} week{goal.deadline > 1 ? "s" : ""}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="goal-actions">
+                      <Button
+                        type="button"
+                        text="Edit"
+                        onClick={() => editGoal(index)}
+                        backgroundColor="#ead7cf"
+                        textColor="#874f3a"
+                      />
+                      <Button
+                        type="button"
+                        text="Delete"
+                        onClick={() => deleteGoal(index)}
+                      />
+                    </div>
+                  </div>
+                )}
               </li>
             ))
           )}
