@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"; // Importing necessary React hooks
+import React, { useCallback, useEffect, useState } from "react"; // Importing necessary React hooks
 import {
   AdvanceQuiz,
   BeginnerQuiz,
@@ -42,15 +42,11 @@ const Quiz = ({ level }) => {
    * Effect hook that triggers when the result state changes.
    * Calls the function to update the user's progress based on the quiz score.
    */
-  useEffect(() => {
-    progressResult();
-  }, [result]);
-
   /**
    * Updates the user's progress based on the quiz score.
    * Sends a PUT request to update the progress in the database.
    */
-  const progressResult = async () => {
+  const progressResult = useCallback(async () => {
     // Retrieve token from local storage
     const token = localStorage.getItem("token");
     // Decode the token to get user ID
@@ -94,7 +90,11 @@ const Quiz = ({ level }) => {
         console.error("Error updating progress:", error);
       }
     }
-  };
+  }, [level, progressUpdated, result.score]);
+
+  useEffect(() => {
+    progressResult();
+  }, [progressResult]);
 
   // Determine the appropriate quiz data based on the level prop
   let quizData;

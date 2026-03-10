@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'; // Import necessary hooks from React
+import React, { useCallback, useEffect, useState } from 'react'; // Import necessary hooks from React
 import jsPDF from "jspdf"; // Import jsPDF for generating PDFs
 import certificate from '../../assets/Images/certificate.png'; // Import the certificate image
 import Button from '../Button/Button'; // Import the custom Button component

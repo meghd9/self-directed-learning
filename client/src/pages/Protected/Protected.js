@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'; // Import React and hooks
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for programmatic navigation
-import Content from '../Content/Content'; // Import the Content component
 import Main from '../Main/Main'; // Import the Main component
 import Welcome from '../Welcome/Welcome'; // Import the Welcome component
 

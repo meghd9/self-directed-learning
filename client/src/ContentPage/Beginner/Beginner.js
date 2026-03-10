@@ -2,7 +2,6 @@ import React from "react";
 import Quiz from "../../components/Quiz/Quiz";
 import img from "../../assets/Images/1.png";
 import img2 from "../../assets/Images/scatter.png";
-import style from "./style.css";
 import neural from "../../assets/Images/neural-network.png";
 import train from "../../assets/Images/ml-test.png";
 import train2 from "../../assets/Images/train-test-example.png";
@@ -66,7 +65,7 @@ const Beginner = ({ topic }) => {
               supervision.
             </li>
             <div className="concept">
-              <img src={concept} alt="ML Concepts Image" />
+              <img src={concept} alt="ML Concepts" />
             </div>
           </ul>
 
