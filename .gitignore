@@ -13,6 +13,8 @@ server/node_modules/
 # TESTING
 # ===============================
 /coverage
+client/coverage/
+server/coverage/
 
 # ===============================
 # PRODUCTION / BUILD OUTPUT
@@ -21,6 +23,7 @@ server/node_modules/
 client/build/
 server/build/
 dist/
+*.tsbuildinfo
 
 # ===============================
 # ENVIRONMENT VARIABLES
